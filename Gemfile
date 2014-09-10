@@ -1,8 +1,8 @@
 source "https://rubygems.org"
 
-gem "sinatra"
-gem "uuid"
-gem "json"
+#ruby "2.1.2"
+
 gem "faye-websocket"
-gem "thin"
-gem "em-http-request"
+gem "sinatra"
+gem "puma"
+gem "redis"
