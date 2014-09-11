@@ -1,8 +1,16 @@
 require File.join(File.dirname(__FILE__), 'lib/lib')
+require 'resque/server'
 
 use Rack::Static,
     :urls => ["/assets"],
     :root => "public"
 
 use Gorilla::SocketBackend
-run Gorilla::App
+
+map '/' do
+  run Gorilla::App
+end
+
+map '/resque' do
+  run Resque::Server
+end
