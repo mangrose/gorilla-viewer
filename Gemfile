@@ -1,8 +1,10 @@
 source "https://rubygems.org"
 
 #ruby "2.1.2"
-
+gem "rake"
 gem "faye-websocket"
-gem "sinatra"
-gem "puma"
 gem "redis"
+gem "sinatra"
+gem "sinatra-redis"
+gem "puma"
+gem "resque"

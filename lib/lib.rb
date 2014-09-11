@@ -7,6 +7,8 @@ require 'json'
 require 'erb'
 
 require 'sinatra/base'
+require 'resque'
 
 require 'middleware/socket'
 require 'gorilla'
+require 'daemon'
