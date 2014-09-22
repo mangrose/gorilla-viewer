@@ -18,10 +18,8 @@ module Gorilla
     def perform_aggregation(json)
       flush "Running background job with json-data: #{json}"
       data = JSON.parse(json, :symbolize_names => true)
-      flush data.inspect
-      payload = {:handle => "aggregator", :text => data[:text]}.to_json
+      payload = {:handle => "aggregator", :text => data[:routing_key]}.to_json
       @redis.publish(CHANNEL, payload)
-      flush "published result"
     end
     
     private 
