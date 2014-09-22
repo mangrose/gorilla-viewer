@@ -18,7 +18,7 @@ module Gorilla
     def perform_aggregation(json)
       flush "Running background job with json-data: #{json}"
       data = JSON.parse(json, :symbolize_names => true)
-      text = "Got external event #{data[:event]} at #{data[:timestamp]}"
+      text = "Got external event <#{data[:event]}> at #{data[:timestamp]}"
       payload = {:handle => "aggregator", :text => text}.to_json
       @redis.publish(CHANNEL, payload)
     end
