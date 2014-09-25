@@ -1,0 +1,6 @@
+develop:
+  sessions:
+    default:
+      database: gorilla
+      hosts:
+        - localhost:27017

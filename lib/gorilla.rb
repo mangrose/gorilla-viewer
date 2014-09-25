@@ -15,6 +15,7 @@ module Gorilla
     end
     
     get "/" do
+      @aggregate = Gorilla::Aggregate.first
       erb :"index.html"
     end
 

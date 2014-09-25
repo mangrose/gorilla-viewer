@@ -5,7 +5,8 @@ module Gorilla
     CHANNEL = "gorilla-pipeline"
 
     def initialize
-      puts "Initialized worker"
+      puts "Initializing worker"
+      Mongoid.load!("mongoid.yml")
       redis_url = ENV["REDISCLOUD_URL"]
       uri = URI.parse(redis_url)
       @redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
@@ -16,15 +17,34 @@ module Gorilla
     end    
   
     def perform_aggregation(json)
-      flush "Running background job with json-data: #{json}"
       data = JSON.parse(json, :symbolize_names => true)
-      text = "Got external event <#{data[:event]}> at #{data[:timestamp]}"
-      payload = {:handle => "aggregator", :text => text}.to_json
+      event_name = data[:event]
+      text = "Got external event &#40;#{event_name}&#41; at #{data[:timestamp]}"
+      if event_name == 'payment_successful'
+        aggregate = process_payment(data)
+      else
+        aggregate = Gorilla::Aggregate.where(:organisation_id => :all).first
+        aggregate = {} unless aggregate
+      end
+      payload = {:handle => "aggregator", :text => text, :aggregate => aggregate.to_hash}.to_json
+      flush "Published payload: #{payload}"
       @redis.publish(CHANNEL, payload)
+      
     end
     
     private 
     
+    def process_payment(data)
+      flush 'Processing payment'
+      aggregate = Gorilla::Aggregate.where(:organisation_id => :all).first
+      aggregate = Gorilla::Aggregate.make(:all) unless aggregate
+      
+      payment = data[:payload][:payment]
+      amount = payment[:amount]
+      aggregate.add_amount(amount)
+      aggregate.save
+      aggregate
+    end
     
     def flush(str)
       puts str

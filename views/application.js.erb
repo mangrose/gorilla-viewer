@@ -7,6 +7,7 @@ ws.onmessage = function(message) {
   $("#chat-text").stop().animate({
     scrollTop: $('#chat-text')[0].scrollHeight
   }, 800);
+$('#total').html('<b>'+data.aggregate.total+'</b>').fadeIn(500).fadeOut(500).fadeIn(300);
 };
 
 $("#input-form").on("submit", function(event) {

@@ -1,5 +1,6 @@
 $LOAD_PATH << File.dirname(__FILE__)
 
+require 'mongoid'
 require 'faye/websocket'
 require 'thread'
 require 'redis'
@@ -10,5 +11,6 @@ require 'sinatra/base'
 require 'resque'
 
 require 'middleware/socket'
+require 'model/aggregate.rb'
 require 'gorilla'
 require 'daemon'
