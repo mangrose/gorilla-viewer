@@ -4,3 +4,6 @@ develop:
       database: gorilla
       hosts:
         - localhost:27017
+production:
+  uri: <%= ENV['MONGOHQ_URL'] %>  
+  
