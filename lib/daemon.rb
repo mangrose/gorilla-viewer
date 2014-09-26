@@ -26,7 +26,7 @@ module Gorilla
         aggregate = Gorilla::Aggregate.where(:organisation_id => :all).first
         aggregate = {} unless aggregate
       end
-      payload = {:handle => "aggregator", :text => text, :aggregate => aggregate.to_hash}.to_json
+      payload = {:handle => "aggregator", :text => text, :data => data, :aggregate => aggregate.to_hash}.to_json
       flush "Published payload: #{payload}"
       @redis.publish(CHANNEL, payload)
       
