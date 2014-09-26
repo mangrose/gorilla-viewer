@@ -20,7 +20,7 @@ module Gorilla
       data = JSON.parse(json, :symbolize_names => true)
       event_name = data[:event]
       text = "Got external event &#40;#{event_name}&#41; at #{data[:timestamp]}"
-      if event_name == 'payment_successful'
+      if event_name == 'payment_success'
         aggregate = process_payment(data)
       else
         aggregate = Gorilla::Aggregate.where(:organisation_id => :all).first
