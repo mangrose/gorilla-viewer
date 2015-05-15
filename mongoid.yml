@@ -7,5 +7,5 @@ develop:
 production:
   sessions:
     default:
-      uri: mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/  
+      uri: mongodb://admin:7Ihmz6vE24j3@$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/gorilla
   
