@@ -15,10 +15,11 @@ module Gorilla
     end
     
     get "/" do
+      @aggregate = Gorilla::Aggregate.first
       erb :"index.html"
     end
 
-    post '/event/receive/' do
+    post '/event/receive' do
       json = request.body.read
       Resque.enqueue(Gorilla::Daemon, json)
     end
