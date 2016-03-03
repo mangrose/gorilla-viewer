@@ -2,13 +2,14 @@
 module Gorilla
   class SocketBackend
     KEEPALIVE_TIME = 15 # in seconds
-    CHANNEL        = "gorilla-pipeline"
+    CHANNEL        = ENV['GORILLA_MESSAGE_PIPELINE']
+    REDIS_URL      = ENV['REDISCLOUD_URL']
 
     def initialize(app)
       @app     = app
       @clients = []
-      puts "redis: #{ENV["REDISCLOUD_URL"]}"
-      uri = URI.parse(ENV["REDISCLOUD_URL"])
+      puts "redis: #{REDIS_URL}"
+      uri = URI.parse(REDIS_URL)
       @redis = Redis.new(host: uri.host, port: uri.port, password: uri.password)
       Thread.new do
         redis_sub = Redis.new(host: uri.host, port: uri.port, password: uri.password)

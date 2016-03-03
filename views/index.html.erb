@@ -7,27 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
-    <div class="container">
-      <div class="jumbotron">
-        <h1>Receiving events from Payway</h1>
-        <div id="total"><%=@aggregate.total%></div>
-      </div>
-      <!--
-      <form id="input-form" class="form-inline">
-        <div class="form-group">
-          <input id="input-handle" type="text" class="form-control" placeholder="Enter handle" autofocus />
+      <div class="jumbotron vertical-center">
+        <div class="container text-center">
+          <h1><div id="total"><%=@aggregate.total%></div></h1>
+          <div id="messages">
+          </div>
         </div>
-        <div class="form-group">
-          <input id="input-text" type="text" class="form-control" placeholder="Enter text here" autofocus />
-        </div>
-        <button class="btn btn-primary" type="submit">Send</button>
-      </form>-->
-      <div class="page-header">
-        <h1>Events</h1>
+
       </div>
-      <div id="chat-text">
-      </div>
-    </div>
 
     <script type="text/javascript" src="assets/js/jquery-2.0.3.min.js"></script>
     <script type="text/javascript" src="dynamic/assets/js/application.js"></script>

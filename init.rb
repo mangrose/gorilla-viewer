@@ -1,1 +1,1 @@
-Mongoid.load!("mongoid.yml")
+Mongoid.load!('mongoid.yml')
